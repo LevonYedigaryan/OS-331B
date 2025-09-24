@@ -102,11 +102,19 @@ int main()
 			{
 				printf("Child exited with status%d\n", WEXITSTATUS(status));
 			}
+			else
+			{
+				printf("Child didnt exit normally.\n");
+			}
 			waitpid(pid32, &status, 0);
 			if(WIFEXITED(status))
                         {
                                 printf("Child exited with status%d\n", WEXITSTATUS(status));
                        	}
+			else
+                        {
+                                printf("Child didnt exit normally.\n");
+                        }
 			printf("Parent PID:%d\n", getpid());
 		}
 	}
