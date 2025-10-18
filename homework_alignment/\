@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main()
+{
+	int i;
+	char c;
+	double d;
+	short s;
+	printf("Size of int: %ld\nSize of char: %ld\nSize of double: %ld\nSize of short: %ld\n", sizeof(i), sizeof(c), sizeof(d), sizeof(s));
+	return 0;
+}
