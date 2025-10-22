@@ -5,7 +5,7 @@ struct Process
 {
 	int pid;
 	int arrival_time;
-	int burs64.227.127.214t_time;
+	int burst_time;
 	int turnaround_time;
 	int waiting_time;
 	int response_time;
@@ -61,8 +61,13 @@ void SJF(struct Process processes[], int length)
                         }
                 }
 	}
-	int time=0, min=processes[0].burst_time;
-	while(time<)
+	int time=0, min=processes[0].burst_time, wait=0, tat=0, rt=0;
+	int all_time=0;
+	for(int i=0;i<length;i++)
+	{
+		all_time=all_time+processes[i].burst_time;
+	}
+	while(time<all_time)
 	{
 		int pr;
 		for(int i=0;i<length;i++)
@@ -85,7 +90,17 @@ void SJF(struct Process processes[], int length)
              	}
 		processes[i].turnaround_time=time+processes[i].burst_time-processes[i].arrival_time;                                    processes[i].waiting_time=time-processes[i].arrival_time;                                                               processes[i].response_time=time-processes[i].arrival_time;                                                              time=time+processes[i].burst_time;
 		printf("| P%d ", processes[pr].pid);
+		wait=wait+processes[i].waiting_time;
+                tat=tat+processes[i].turnaround_time;
+                rt=rt+processes[i].response_time;
+
 	}
+	printf("|\nPID\tAT\tBT\tWT\tTAT\tRT\n");
+	for(int i=0;i<length;i++)
+	{
+		printf("%d\t%d\t%d\t%d\t%d\t%d\n", processes[i].pid, processes[i].arrival_time, processes[i].burst_time, processes[i].waiting_time, processes[i].turnaround_time, processes[i].response_time);
+	}
+	printf("\nAverage Waiting Time: %.2f\nAverage Turnaround Time: %.2f\nAverage Response Time: %.2f\n", (float)wait/length, (float)tat/length, (float)rt/length);
 }
 
 int main()
@@ -100,5 +115,7 @@ int main()
 		printf("Enter the arrival time and burst time for process %d: ", i + 1);
 		scanf("%d %d", &processes[i].arrival_time, &processes[i].burst_time);
 	}
+	FCFS(processes, length);
+	SJF(processes, length);
 	return 0;
 }
