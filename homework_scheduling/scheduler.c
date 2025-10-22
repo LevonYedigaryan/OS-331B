@@ -88,11 +88,14 @@ void SJF(struct Process processes[], int length)
 				}
 			}
              	}
-		processes[i].turnaround_time=time+processes[i].burst_time-processes[i].arrival_time;                                    processes[i].waiting_time=time-processes[i].arrival_time;                                                               processes[i].response_time=time-processes[i].arrival_time;                                                              time=time+processes[i].burst_time;
+		processes[pr].turnaround_time=time+processes[pr].burst_time-processes[pr].arrival_time;
+		processes[pr].waiting_time=time-processes[pr].arrival_time;
+		processes[pr].response_time=time-processes[pr].arrival_time;
+		time=time+processes[pr].burst_time+1;
 		printf("| P%d ", processes[pr].pid);
-		wait=wait+processes[i].waiting_time;
-                tat=tat+processes[i].turnaround_time;
-                rt=rt+processes[i].response_time;
+		wait=wait+processes[pr].waiting_time;
+                tat=tat+processes[pr].turnaround_time;
+                rt=rt+processes[pr].response_time;
 
 	}
 	printf("|\nPID\tAT\tBT\tWT\tTAT\tRT\n");
